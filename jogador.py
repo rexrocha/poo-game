@@ -91,7 +91,7 @@ class Jogador:
     def pulos_restantes(self, value):
         self.__pulos_restantes = max(0, value)
 
-    def mover(self, teclas: list) -> None:
+    def mover(self, teclas: list[bool]) -> None:
         self.__vel_x = 0
         vento = random.uniform(-0.5, 0.5)
 

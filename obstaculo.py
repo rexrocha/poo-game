@@ -34,7 +34,7 @@ class ObstaculoMovel(Obstaculo):
         self.__direcao = 1
         self.__x_original = x
 
-    def atualizar(self):
+    def atualizar(self) -> None:
         self.rect.x += self.__vel * self.__direcao
         if abs(self.rect.x - self.__x_original) > 100:
             self.__direcao *= -1

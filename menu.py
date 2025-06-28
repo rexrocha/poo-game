@@ -1,3 +1,4 @@
+import traceback
 import pygame
 import os
 import json
@@ -227,9 +228,13 @@ class Menu:
         except (FileNotFoundError, json.JSONDecodeError):
             self.__ranking = []
 
-    def salvar_ranking(self):
+    def salvar_ranking(self) -> None:
         try:
+            os.makedirs(os.path.dirname("ranking.json") or '.', exist_ok=True)
             with open("ranking.json", "w") as f:
                 json.dump(self.__ranking, f, indent=4)
+        except IOError as e:
+            print(f"Erro de I/O ao salvar ranking: {e}")
         except Exception as e:
-            print(f"Erro ao salvar ranking: {e}")
+            print(f"Erro inesperado ao salvar ranking: {e}")
+            traceback.print_exc()

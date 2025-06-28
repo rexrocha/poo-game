@@ -44,3 +44,7 @@ class Projetil:
         else:
             cor = (255, 0, 0) if self.__dono == 0 else (255, 255, 0)
             pygame.draw.rect(tela, cor, self.__rect)
+    def __eq__(self, other: 'Projetil') -> bool:
+        return (self.rect.x == other.rect.x and 
+                self.rect.y == other.rect.y and 
+                self.__dono == other.__dono)
