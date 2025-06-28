@@ -9,6 +9,7 @@ class Som:
         self.__volume_efeitos = 0.7
         self.__efeitos = {}
         self.__musica_fundo = None
+        self.__musica_tocando = False
         
         try:
             self.__musica_fundo = pygame.mixer.Sound(os.path.join("assets", "musica.wav"))
@@ -51,12 +52,14 @@ class Som:
             self.__efeitos[nome] = None
 
     def tocar_musica(self):
-        if self.__musica_fundo:
-            self.__musica_fundo.play(-1)
+        if self.__musica_fundo and not self.__musica_tocando:
+            self.__musica_fundo.play(-1)  # Toca em loop
+            self.__musica_tocando = True
 
     def parar_musica(self):
-        if self.__musica_fundo:
+        if self.__musica_fundo and self.__musica_tocando:
             self.__musica_fundo.stop()
+            self.__musica_tocando = False
 
     def tocar_efeito(self, nome):
         if nome in self.__efeitos and self.__efeitos[nome]:

@@ -31,6 +31,7 @@ def main():
 
     while True:
         if estado == "menu":
+            som.tocar_musica()  
             resultado = menu.executar()
             if resultado is None:
                 estado = "sair"

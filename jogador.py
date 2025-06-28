@@ -119,22 +119,26 @@ class Jogador:
 
     def atirar(self) -> None:
         if self.__tipo == 1:
+            # Tiro único vertical
             self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo))
         else:
-            self.__projeteis.append(Projetil(self.__rect.centerx - 15, self.__rect.top, self.__tipo, vertical=True))
-            self.__projeteis.append(Projetil(self.__rect.centerx + 15, self.__rect.top, self.__tipo, vertical=True))
+            # Mantém tiros duplos verticais
+            self.__projeteis.append(Projetil(self.__rect.centerx - 15, self.__rect.top, self.__tipo))
+            self.__projeteis.append(Projetil(self.__rect.centerx + 15, self.__rect.top, self.__tipo))
 
     def poder_especial(self, inimigos) -> None:
         agora = time.time()
         if agora - self.__ultimo_poder >= self.__tempo_recarga:
             if self.__tipo == 1:
-                for angle in range(-30, 31, 15):
-                    self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo, 90 + angle))
+                # Dispara 3 projéteis verticais em posições diferentes
+                self.__projeteis.append(Projetil(self.__rect.centerx - 20, self.__rect.top, self.__tipo))  # Esquerda
+                self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo))        # Centro
+                self.__projeteis.append(Projetil(self.__rect.centerx + 20, self.__rect.top, self.__tipo))   # Direita
             else:
                 for inimigo in inimigos:
                     inimigo.eliminado = True
             self.__ultimo_poder = agora
-
+    
     def desenhar(self, tela: pygame.Surface) -> None:
         tela.blit(self.__imagem, self.__rect)
         for p in self.__projeteis:

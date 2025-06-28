@@ -27,7 +27,6 @@ class Menu:
         self.__nome_jogador = value[:15]
 
     def executar(self):
-        self.__som.tocar_musica()
         opcao_selecionada = 0
         opcoes = ["Novo Jogo", "Continuar", "Configurações", "Ranking", "Sair"]
         
