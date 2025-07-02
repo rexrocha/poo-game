@@ -12,7 +12,7 @@ class Som:
         self.__musica_tocando = False
         
         try:
-            self.__musica_fundo = pygame.mixer.Sound(os.path.join("assets", "musica.wav"))
+            self.__musica_fundo = pygame.mixer.Sound(os.path.join("assets", "musica.mp3"))
             self.__musica_fundo.set_volume(self.__volume_musica)
             
             self.carregar_efeito("tiro", "tiro.wav")
