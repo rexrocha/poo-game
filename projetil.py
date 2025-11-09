@@ -3,9 +3,9 @@ import os
 import math
 
 class Projetil:
-    def __init__(self, x: int, y: int, dono: int, vertical: bool = True):  # Adicionei parâmetro vertical
+    def __init__(self, x: int, y: int, dono: int, vertical: bool = True):
         self.__dono = dono
-        self.__vertical = vertical  # Novo atributo
+        self.__vertical = vertical
         
         try:
             if dono == 0:
@@ -17,16 +17,19 @@ class Projetil:
             self.__imagem = None
         
         speed = 3 if dono == 0 else 5
-        # Sempre movimento vertical
         self.__vel_x = 0
-        self.__vel_y = -speed if dono > 0 else speed  # Jogador: sobe, Inimigo: desce
+        self.__vel_y = -speed if dono > 0 else speed
         
         self.__rect = pygame.Rect(x, y, 5, 10)
-        self.__gravidade = 0  # Removi gravidade para movimento puramente vertical
+        self.__gravidade = 0
 
     @property
     def rect(self):
         return self.__rect
+
+    @property
+    def dono(self):
+        return self.__dono
 
     def atualizar(self) -> bool:
         self.__rect.y += self.__vel_y
@@ -40,12 +43,12 @@ class Projetil:
 
     def desenhar(self, tela: pygame.Surface) -> None:
         if self.__imagem:
-            tela.blit(self.__imagem, self.__rect)  # Sem rotação
+            tela.blit(self.__imagem, self.__rect)
         else:
             cor = (255, 0, 0) if self.__dono == 0 else (255, 255, 0)
             pygame.draw.rect(tela, cor, self.__rect)
-     #não é usado
+    
     def __eq__(self, other: 'Projetil') -> bool:
         return (self.rect.x == other.rect.x and 
                 self.rect.y == other.rect.y and 
-                self.__dono == other.__dono)
+                self.dono == other.dono)
