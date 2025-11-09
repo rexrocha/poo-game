@@ -55,6 +55,10 @@ class Jogador:
     def ultimo_poder(self):
         return self.__ultimo_poder
 
+    @ultimo_poder.setter
+    def ultimo_poder(self, value):
+        self.__ultimo_poder = value
+
     @property
     def tempo_recarga(self):
         return self.__tempo_recarga
@@ -119,10 +123,8 @@ class Jogador:
 
     def atirar(self) -> None:
         if self.__tipo == 1:
-            # Tiro único vertical
             self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo))
         else:
-            # Mantém tiros duplos verticais
             self.__projeteis.append(Projetil(self.__rect.centerx - 15, self.__rect.top, self.__tipo))
             self.__projeteis.append(Projetil(self.__rect.centerx + 15, self.__rect.top, self.__tipo))
 
@@ -130,10 +132,9 @@ class Jogador:
         agora = time.time()
         if agora - self.__ultimo_poder >= self.__tempo_recarga:
             if self.__tipo == 1:
-                # Dispara 3 projéteis verticais em posições diferentes
-                self.__projeteis.append(Projetil(self.__rect.centerx - 20, self.__rect.top, self.__tipo))  # Esquerda
-                self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo))        # Centro
-                self.__projeteis.append(Projetil(self.__rect.centerx + 20, self.__rect.top, self.__tipo))   # Direita
+                self.__projeteis.append(Projetil(self.__rect.centerx - 20, self.__rect.top, self.__tipo))
+                self.__projeteis.append(Projetil(self.__rect.centerx, self.__rect.top, self.__tipo))
+                self.__projeteis.append(Projetil(self.__rect.centerx + 20, self.__rect.top, self.__tipo))
             else:
                 for inimigo in inimigos:
                     inimigo.eliminado = True
